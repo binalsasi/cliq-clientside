@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'upload_image_activity.dart';
+import 'userhome_activity.dart';
+
 import 'constants.dart';
 
 class HomeActivity extends StatefulWidget {
@@ -55,7 +57,10 @@ class _HomeActivityState extends State<HomeActivity> {
             ),
             Container(
               color: Colors.blue,
+              /*
               child: Icon(Icons.add_a_photo),
+              */
+              child: UserHomeActivity(),
             ),
           ]),
           bottomNavigationBar: BottomAppBar(
@@ -84,3 +89,5 @@ class _HomeActivityState extends State<HomeActivity> {
         ));
   }
 }
+
+
