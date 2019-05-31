@@ -5,11 +5,11 @@
   - for internal functioning
 */
 class Constants{
-  static final String spref_username = "username4";
+  static final String spref_username = "username5";
   static final String spref_key      = "key";
 
-  static final String url_registration = "http://192.168.0.131:8000/cliq_backend/register";
-  static final String url_imageUpload  = "http://192.168.0.131:8000/cliq_backend/image_upload";
+  static final String url_registration = "http://192.168.0.112:8000/cliq_backend/register";
+  static final String url_imageUpload  = "http://192.168.0.112:8000/cliq_backend/image_upload";
 
   static final String registration_uUsername = "username";
   static final String registration_dUsername = "username";
