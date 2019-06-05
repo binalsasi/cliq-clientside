@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'upload_image_activity.dart';
 import 'userhome_activity.dart';
+import 'userfeed_activity.dart';
 
 import 'constants.dart';
 
@@ -52,11 +53,11 @@ class _HomeActivityState extends State<HomeActivity> {
           ),
           body: TabBarView(children: [
             Container(
-              color: Colors.red,
-              child: Icon(Icons.calendar_today),
+              //color: Colors.red,
+              child: UserFeedActivity(),
             ),
             Container(
-              color: Colors.blue,
+              //color: Colors.blue,
               /*
               child: Icon(Icons.add_a_photo),
               */

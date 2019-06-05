@@ -19,13 +19,13 @@ class _RegistrationActivity extends State<RegistrationActivity> {
     String username = usernameController.text;
 
     http.post(Constants.url_registration, body: {
-      Constants.registration_uUsername  : username,
+      Constants.uUsername  : username,
     }).then((res) async{
       print(res.statusCode);
       if(res.statusCode == 200) {
         final body = json.decode(res.body);
-        String user1 = body[Constants.registration_dUsername];
-        int lk1   = body[Constants.registration_dKey];
+        String user1 = body[Constants.dUsername];
+        int lk1   = body[Constants.dKey];
         SharedPreferences prefs = await SharedPreferences.getInstance();
         prefs.setString(Constants.spref_username, user1);
         prefs.setInt(Constants.spref_key, lk1);

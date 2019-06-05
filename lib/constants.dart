@@ -5,22 +5,25 @@
   - for internal functioning
 */
 class Constants{
-  static final String spref_username = "username5";
+  static final String spref_username = "username";
   static final String spref_key      = "key";
 
   static final String url_registration = "http://192.168.0.112:8000/cliq_backend/register";
   static final String url_imageUpload  = "http://192.168.0.112:8000/cliq_backend/image_upload";
   static final String url_fetchHome    = "http://192.168.0.112:8000/cliq_backend/fetch_home";
+  static final String url_fetchFeeds    = "http://192.168.0.112:8000/cliq_backend/fetch_feeds";
 
-  static final String registration_uUsername = "username";
-  static final String registration_dUsername = "username";
-  static final String registration_dKey      = "lastkey";
+  static final String uUsername = "username";
+  static final String uImage = "image";
+  static final String uDescription = "description";
 
-  static final String imageUpload_uImage = "image";
-  static final String imageUpload_uDescription = "description";
-  static final String imageUpload_uUsername = "username";
+  static final String dUsername = "username";
+  static final String dKey      = "lastkey";
+  static final String dPath = "path";
+  static final String dDescription = "description";
+  static final String dBase64String = "b64string";
 
-  static final String fetchHome_uUsername = "username";
+
 
   static final String route_MainActivity = "/";
   static final String route_RegistrationActivity = "/RegistrationActivity";
