@@ -5,6 +5,7 @@ import 'registration_activity.dart';
 import 'main_activity.dart';
 import 'home_activity.dart';
 import 'finalize_photo_activity.dart';
+import 'postdetails_activity.dart';
 import 'constants.dart';
 
 
@@ -48,11 +49,12 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: MainActivity.route,
       routes: {
-        MainActivity.route: (context) => MainActivity(),
-        HomeActivity.route: (context) => HomeActivity(),
-        UploadImageActivity.route: (context) => UploadImageActivity(),
-        RegistrationActivity.route: (context) => RegistrationActivity(),
-        FinalizePhotoActivity.route:(context) => FinalizePhotoActivity(),
+        MainActivity.route:          (context) => MainActivity(),
+        HomeActivity.route:          (context) => HomeActivity(),
+        UploadImageActivity.route:   (context) => UploadImageActivity(),
+        RegistrationActivity.route:  (context) => RegistrationActivity(),
+        FinalizePhotoActivity.route: (context) => FinalizePhotoActivity(),
+        PostDetailsActivity.route:   (context) => PostDetailsActivity(),
       },
     );
   }

@@ -14,16 +14,19 @@ class Constants{
   static final String url_imageUpload  = hostname + "/cliq_backend/image_upload";
   static final String url_fetchHome    = hostname + "/cliq_backend/fetch_home";
   static final String url_fetchFeeds   = hostname + "/cliq_backend/fetch_feeds";
+  static final String url_fetchPost    = hostname + "/cliq_backend/fetch_post";
 
   static final String uUsername = "username";
   static final String uImage = "image";
   static final String uDescription = "description";
+  static final String uPostId = "postId";
 
   static final String dUsername = "username";
   static final String dKey      = "lastkey";
   static final String dPath = "path";
   static final String dDescription = "description";
   static final String dBase64String = "b64string";
+  static final String dPostId = "postId";
 
 
 
@@ -32,12 +35,14 @@ class Constants{
   static final String route_HomeActivity = "/HomeActivity";
   static final String route_UploadImageActivity = "/HomeActivity/UploadImageActivity";
   static final String route_FinalizePhotoActivity = "/HomeActivity/UploadImageActivity/FinalizePhoto";
+  static final String route_PostDetailsActivity = "/HomeActivity/PostDetailsActivity";
 
   static final String image_selectImage = "assets/images/select_image.png";
 
   static final String ok = "ok";
 
   static final String ecode_noFeeds = "E:0x80003";
+  static final String ecode_noSuchPost = "E:0x80004";
 }
 
 /*
@@ -51,6 +56,7 @@ class Strings{
   static final String title_FinalizePhotoActivity = "Finalize Photo";
   static final String title_UploadImageActivity = "Post Photo";
   static final String title_HomeActivity = "Cliq";
+  static final String title_PostDetails = "Post Details";
 
   static final String str_signup = "Sign Up";
   static final String str_tryPhotoUploadAgain = "There was an error while posting the photo. Try again?";
@@ -60,4 +66,5 @@ class Strings{
   static final String str_errorWhileFetchingHome = "There was an error while fetching home";
   static final String str_noHomeFeeds = "You have not uploaded anything yet";
   static final String str_noFeeds = "There is no feed to show";
+  static final String str_noSuchPost = "We couldn't find the post you were looking for";
 }

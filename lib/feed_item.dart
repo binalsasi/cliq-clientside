@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'constants.dart';
 
 class FeedItem{
+  String pid;
   String path;
   String description;
   String username;
@@ -10,7 +11,8 @@ class FeedItem{
   Uint8List imageBytes;
 
   FeedItem.fromJson(Map<String, dynamic> json)
-      : path = json[Constants.dPath],
+      : pid = json[Constants.dPostId].toString(),
+        path = json[Constants.dPath],
         description = json[Constants.dDescription],
         username = json[Constants.dUsername],
         b64string = json[Constants.dBase64String],

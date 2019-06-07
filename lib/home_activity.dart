@@ -13,7 +13,9 @@ class HomeActivity extends StatefulWidget {
   _HomeActivityState createState() => _HomeActivityState();
 }
 
-class _HomeActivityState extends State<HomeActivity> {
+class _HomeActivityState extends State<HomeActivity> with AutomaticKeepAliveClientMixin{
+  bool wantKeepAlive = true;
+
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
 
   void uploadPhoto() async {

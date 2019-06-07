@@ -4,6 +4,7 @@ import 'feed_item.dart';
 import 'constants.dart';
 import 'main_activity.dart';
 import 'dart:convert';
+import 'postdetails_activity.dart';
 
 class UserFeedActivity extends StatefulWidget {
   @override
@@ -47,6 +48,7 @@ class _UserFeedActivityState extends State<UserFeedActivity> with AutomaticKeepA
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) => feedRefreshKey.currentState.show());
   }
 
   Future<Null> _refresh(){
@@ -96,7 +98,11 @@ class MainFeedWidget extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return GestureDetector(
+      onTap: (){
+        Navigator.pushNamed(context, PostDetailsActivity.route,arguments: item.pid);
+      },
+      child: Container(
           margin: EdgeInsets.only(bottom: 10.0),
           padding: EdgeInsets.all(10.0),
           child: Container(
@@ -160,6 +166,7 @@ class MainFeedWidget extends StatelessWidget{
               ],
             ),
           )
-        );
+      ),
+    );
   }
 }
