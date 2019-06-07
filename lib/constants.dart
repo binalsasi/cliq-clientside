@@ -8,10 +8,12 @@ class Constants{
   static final String spref_username = "username";
   static final String spref_key      = "key";
 
-  static final String url_registration = "http://192.168.0.112:8000/cliq_backend/register";
-  static final String url_imageUpload  = "http://192.168.0.112:8000/cliq_backend/image_upload";
-  static final String url_fetchHome    = "http://192.168.0.112:8000/cliq_backend/fetch_home";
-  static final String url_fetchFeeds    = "http://192.168.0.112:8000/cliq_backend/fetch_feeds";
+  static final String hostname = "https://zinc-advice-242819.appspot.com";
+
+  static final String url_registration = hostname + "/cliq_backend/register";
+  static final String url_imageUpload  = hostname + "/cliq_backend/image_upload";
+  static final String url_fetchHome    = hostname + "/cliq_backend/fetch_home";
+  static final String url_fetchFeeds   = hostname + "/cliq_backend/fetch_feeds";
 
   static final String uUsername = "username";
   static final String uImage = "image";

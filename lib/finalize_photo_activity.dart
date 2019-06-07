@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'main_activity.dart';
 import 'constants.dart';
+import 'package:image/image.dart' as Img;
 
 class FinalizePhotoActivity extends StatefulWidget {
   static String route = Constants.route_FinalizePhotoActivity;
@@ -52,7 +53,12 @@ class _FinalizePhotoFormState extends State<FinalizePhotoForm> {
   bool _sendImage(){
     if(widget.image == null) return false;
 
-    String base64Image = base64Encode(widget.image.readAsBytesSync());
+    final img = Img.decodeImage(widget.image.readAsBytesSync());
+    Img.Image cropped = Img.copyResizeCropSquare(img, 1024);
+
+    String base64Image = base64Encode(Img.encodeJpg(cropped));
+
+    //String base64Image = base64Encode(widget.image.readAsBytesSync());
     String description = descController.text;
     http.post(Constants.url_imageUpload, body: {
       Constants.uImage : base64Image,
@@ -68,9 +74,9 @@ class _FinalizePhotoFormState extends State<FinalizePhotoForm> {
             content: new Text(Strings.str_tryPhotoUploadAgain)
         ));
       }
-      print(res.body);
+      debugPrint(res.body);
     }).catchError((err) {
-      print(err);
+      debugPrint(err);
     });
 
   }

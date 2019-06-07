@@ -15,6 +15,7 @@ class _UploadImageActivityState extends State<UploadImageActivity> {
   File _image;
 
   Future getImage(source) async {
+
     var image = await ImagePicker.pickImage(source: source);
 
     setState(() {

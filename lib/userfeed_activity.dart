@@ -45,6 +45,7 @@ class _UserFeedActivityState extends State<UserFeedActivity> {
                     return new Text('Error: ${snapshot.error}');
                   else {
                     http.Response result = snapshot.data;
+                    print(result.body);
                     if(result.body == "E:0x80003")
                       return Center(
                         child: Text("There is no feed to show"),

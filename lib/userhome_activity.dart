@@ -50,6 +50,7 @@ class _UserHomeActivityState extends State<UserHomeActivity>{
                     else {
                       http.Response result = snapshot.data;
 
+                      print(result.body);
                       if(result.body == "E:0x80003")
                         return Center(
                           child: Text("You have not uploaded anything yet"),
