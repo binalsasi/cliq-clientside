@@ -36,6 +36,8 @@ class Constants{
   static final String image_selectImage = "assets/images/select_image.png";
 
   static final String ok = "ok";
+
+  static final String ecode_noFeeds = "E:0x80003";
 }
 
 /*
@@ -56,4 +58,6 @@ class Strings{
   static final String str_photoPosted = "Photo posted!";
 
   static final String str_errorWhileFetchingHome = "There was an error while fetching home";
+  static final String str_noHomeFeeds = "You have not uploaded anything yet";
+  static final String str_noFeeds = "There is no feed to show";
 }

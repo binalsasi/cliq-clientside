@@ -11,19 +11,49 @@ class UserFeedActivity extends StatefulWidget {
 }
 
 class _UserFeedActivityState extends State<UserFeedActivity> {
-  Future<http.Response> mainFeedsFuture;
   List<FeedItem> feeds;
+  final GlobalKey<RefreshIndicatorState> feedRefreshKey = new GlobalKey<RefreshIndicatorState>();
 
-  Future<http.Response> fetchMyFeeds() async {
-    return http.post(Constants.url_fetchFeeds, body: {
+
+  Future<List<FeedItem>> fetchMyFeeds() async {
+    final response = await http.post(Constants.url_fetchFeeds, body: {
       Constants.uUsername: MainActivity.username,
     });
+
+    print(response.body);
+
+    if(response.body == Constants.ecode_noFeeds){
+      // No feed to show. : do something
+      return null;
+    }
+
+    try{
+      final json = jsonDecode(response.body);
+      print(json);
+      List<FeedItem> _feeds = new List();
+      json.forEach((s) => _feeds.add(FeedItem.fromJson(s)));
+
+      return _feeds;
+
+    } on FormatException catch(e){
+      // not json string.
+      print('UserFeed data was not JSON. Exception : ' + e.toString());
+      print(response.body);
+    }
+    return null;
   }
 
   @override
   void initState() {
     super.initState();
-    mainFeedsFuture = fetchMyFeeds();
+  }
+
+  Future<Null> _refresh(){
+    return fetchMyFeeds().then((listOfItems){
+      setState((){
+        feeds = listOfItems;
+      });
+    });
   }
 
   @override
@@ -31,41 +61,28 @@ class _UserFeedActivityState extends State<UserFeedActivity> {
     return new Container(
       alignment: Alignment.center,
       padding: EdgeInsets.all(5.0),
-      child: new FutureBuilder(
-          future: mainFeedsFuture,
-          builder: (BuildContext context, AsyncSnapshot snapshot) {
-            if (!snapshot.hasData) {
-              return new CircularProgressIndicator();
-            } else {
-              switch (snapshot.connectionState) {
-                case ConnectionState.waiting:
-                  return new CircularProgressIndicator();
-                default:
-                  if (snapshot.hasError)
-                    return new Text('Error: ${snapshot.error}');
-                  else {
-                    http.Response result = snapshot.data;
-                    print(result.body);
-                    if(result.body == "E:0x80003")
-                      return Center(
-                        child: Text("There is no feed to show"),
-                      );
-
-                    final json = jsonDecode(result.body);
-                    print(json);
-                    feeds = new List();
-                    json.forEach((s) => feeds.add(FeedItem.fromJson(s)));
-
-                    return ListView.builder(
-                        itemCount: feeds.length,
-                        itemBuilder: (context, position){
-                          return MainFeedWidget(item : feeds[position]);
-                        }
-                    );
-                  }
-              }
-            }
-          }),
+      child: RefreshIndicator(
+          key: feedRefreshKey,
+          onRefresh: _refresh,
+          child: feeds == null ?
+              ListView(
+                  children: [
+                    Center(
+                      child: Container(
+                        child: Text(Strings.str_noFeeds),
+                        alignment: Alignment.center,
+                        padding: EdgeInsets.only(top:50.0),
+                      ),
+                    )
+                  ]
+              ) :
+              ListView.builder(
+                itemCount: feeds.length,
+                itemBuilder: (context, position){
+                  return MainFeedWidget(item : feeds[position]);
+                }
+              ),
+      ),
     );
   }
 }
