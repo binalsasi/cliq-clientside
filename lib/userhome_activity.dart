@@ -11,7 +11,8 @@ class UserHomeActivity extends StatefulWidget {
   _UserHomeActivityState createState() => _UserHomeActivityState();
 }
 
-class _UserHomeActivityState extends State<UserHomeActivity>{
+class _UserHomeActivityState extends State<UserHomeActivity> with AutomaticKeepAliveClientMixin{
+  bool wantKeepAlive = true;
   List<FeedItem> _feeds;
   final GlobalKey<RefreshIndicatorState> _refreshKey = new GlobalKey<RefreshIndicatorState>();
 

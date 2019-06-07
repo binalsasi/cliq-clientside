@@ -10,7 +10,8 @@ class UserFeedActivity extends StatefulWidget {
   _UserFeedActivityState createState() => _UserFeedActivityState();
 }
 
-class _UserFeedActivityState extends State<UserFeedActivity> {
+class _UserFeedActivityState extends State<UserFeedActivity> with AutomaticKeepAliveClientMixin{
+  bool wantKeepAlive = true;
   List<FeedItem> feeds;
   final GlobalKey<RefreshIndicatorState> feedRefreshKey = new GlobalKey<RefreshIndicatorState>();
 
