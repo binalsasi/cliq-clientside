@@ -74,17 +74,11 @@ class _HomeActivityState extends State<HomeActivity> with AutomaticKeepAliveClie
               tabs: <Widget>[
                 Container(
                   padding: EdgeInsets.all(10.0),
-                  child: Icon(Icons.calendar_today),
+                  child: Icon(Icons.home),
                 ),
-                /*
                 Container(
                   padding: EdgeInsets.all(10.0),
-                  child: Icon(Icons.add_a_photo),
-                ),
-                */
-                Container(
-                  padding: EdgeInsets.all(10.0),
-                  child: Icon(Icons.account_box),
+                  child: Icon(Icons.account_circle),
                 ),
               ],
             ),
