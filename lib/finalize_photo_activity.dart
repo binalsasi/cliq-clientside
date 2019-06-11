@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'main_activity.dart';
 import 'constants.dart';
+import 'home_activity.dart';
 import 'package:image/image.dart' as Img;
 
 class FinalizePhotoActivity extends StatefulWidget {
@@ -13,12 +14,19 @@ class FinalizePhotoActivity extends StatefulWidget {
   _FinalizePhotoActivityState createState() => _FinalizePhotoActivityState();
 }
 
+class PhotoArg{
+  File image;
+  GlobalKey<ScaffoldState> scaffoldKey;
+
+  PhotoArg({Key key, this.image, this.scaffoldKey});
+}
+
 class _FinalizePhotoActivityState extends State<FinalizePhotoActivity> {
-  File _selectedImage;
+  PhotoArg arg;
 
   @override
   Widget build(BuildContext context) {
-    _selectedImage = ModalRoute.of(context).settings.arguments;
+    arg = ModalRoute.of(context).settings.arguments;
 
     return Scaffold(
       appBar: AppBar(
@@ -30,16 +38,16 @@ class _FinalizePhotoActivityState extends State<FinalizePhotoActivity> {
         title: Text(Strings.title_FinalizePhotoActivity),
       ),
       body: FinalizePhotoForm(
-        image: _selectedImage,
+        arg: arg,
       ),
     );
   }
 }
 
 class FinalizePhotoForm extends StatefulWidget {
-  File image;
+  PhotoArg arg;
 
-  FinalizePhotoForm({Key key, this.image}) : super(key: key);
+  FinalizePhotoForm({Key key, this.arg}) : super(key: key);
 
   @override
   _FinalizePhotoFormState createState() => _FinalizePhotoFormState();
@@ -50,10 +58,10 @@ class _FinalizePhotoFormState extends State<FinalizePhotoForm> {
 
   final descController = TextEditingController();
 
-  bool _sendImage(){
-    if(widget.image == null) return false;
+  Future _sendImage() async{
+    if(widget.arg.image == null) return false;
 
-    final img = Img.decodeImage(widget.image.readAsBytesSync());
+    final img = Img.decodeImage(widget.arg.image.readAsBytesSync());
     Img.Image cropped = Img.copyResizeCropSquare(img, 1024);
 
     String base64Image = base64Encode(Img.encodeJpg(cropped));
@@ -66,17 +74,18 @@ class _FinalizePhotoFormState extends State<FinalizePhotoForm> {
       Constants.uUsername : MainActivity.username,
     }).then((res) {
       print(res.statusCode);
-      if(res.statusCode == 200){
-        Navigator.pop(context, true);
+      if(res.statusCode == 200) {
+        //   HomeActivity.photoUpload(true, "");
+        widget.arg.scaffoldKey.currentState.showSnackBar(
+            new SnackBar(content: new Text(Strings.str_photoPosted)));
       }
       else{
-        Scaffold.of(context).showSnackBar(new SnackBar(
-            content: new Text(Strings.str_tryPhotoUploadAgain)
-        ));
+        widget.arg.scaffoldKey.currentState.showSnackBar(new SnackBar(content: new Text(Strings.str_tryPhotoUploadAgain)));
       }
       debugPrint(res.body);
     }).catchError((err) {
       debugPrint(err);
+      widget.arg.scaffoldKey.currentState.showSnackBar(new SnackBar(content: new Text(Strings.str_tryPhotoUploadAgain)));
     });
 
   }
@@ -103,7 +112,7 @@ class _FinalizePhotoFormState extends State<FinalizePhotoForm> {
                       SizedBox(
                         height: MediaQuery.of(context).size.height / 3,
                         width: MediaQuery.of(context).size.width / 3,
-                        child: Image.file(widget.image),
+                        child: Image.file(widget.arg.image),
                       )
                     ],
                   ),
@@ -130,6 +139,7 @@ class _FinalizePhotoFormState extends State<FinalizePhotoForm> {
                         child: Text(Strings.str_post),
                         onPressed: (){
                           _sendImage();
+                          Navigator.pop(context);
                         },
                       )
                   ),

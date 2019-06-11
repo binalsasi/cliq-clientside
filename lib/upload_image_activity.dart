@@ -13,6 +13,7 @@ class UploadImageActivity extends StatefulWidget {
 
 class _UploadImageActivityState extends State<UploadImageActivity> {
   File _image;
+  GlobalKey<ScaffoldState> scaffoldKey;
 
   Future getImage(source) async {
 
@@ -24,12 +25,14 @@ class _UploadImageActivityState extends State<UploadImageActivity> {
   }
 
   void finalizePhoto() async{
-    final r = await Navigator.pushNamed(context, FinalizePhotoActivity.route, arguments: _image);
-    Navigator.pop(context, r);
+    PhotoArg arg = new PhotoArg(image: _image, scaffoldKey:  scaffoldKey);
+    await Navigator.pushNamed(context, FinalizePhotoActivity.route, arguments: arg);
+    Navigator.pop(context);
   }
 
   @override
   Widget build(BuildContext context) {
+    scaffoldKey = ModalRoute.of(context).settings.arguments;
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(

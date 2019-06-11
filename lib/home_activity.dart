@@ -19,11 +19,7 @@ class _HomeActivityState extends State<HomeActivity> with AutomaticKeepAliveClie
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
 
   void uploadPhoto() async {
-    final r = await Navigator.pushNamed(context, UploadImageActivity.route);
-    if (r == true) {
-      scaffoldKey.currentState.showSnackBar(
-          new SnackBar(content: new Text(Strings.str_photoPosted)));
-    }
+    Navigator.pushNamed(context, UploadImageActivity.route, arguments: scaffoldKey);
   }
 
   @override
