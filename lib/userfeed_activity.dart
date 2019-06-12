@@ -5,6 +5,7 @@ import 'constants.dart';
 import 'main_activity.dart';
 import 'dart:convert';
 import 'postdetails_activity.dart';
+import 'profile_activity.dart';
 
 class UserFeedActivity extends StatefulWidget {
   @override
@@ -151,22 +152,23 @@ class MainFeedWidget extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: (){
-        Navigator.pushNamed(context, PostDetailsActivity.route,arguments: item.pid);
-      },
-      child: Container(
-          margin: EdgeInsets.only(bottom: 10.0),
-          padding: EdgeInsets.all(10.0),
-          child: Container(
-            decoration: new BoxDecoration(
-                border: new Border.all(color: Colors.white)
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Container(
+
+    return Container(
+        margin: EdgeInsets.only(bottom: 10.0),
+        padding: EdgeInsets.all(10.0),
+        child: Container(
+          decoration: new BoxDecoration(
+              border: new Border.all(color: Colors.white)
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              GestureDetector(
+                onTap: (){
+                  Navigator.pushNamed(context, ProfileActivity.route,arguments: item.username);
+                },
+                child: Container(
                   padding: EdgeInsets.all(10.0),
                   color: Colors.white,
                   child: Row(
@@ -188,8 +190,13 @@ class MainFeedWidget extends StatelessWidget{
                     ],
                   ),
                 ),
-                Container(
-                  padding: EdgeInsets.all(10.0),
+              ),
+              GestureDetector(
+                onTap: (){
+                  Navigator.pushNamed(context, PostDetailsActivity.route,arguments: item.pid);
+                },
+                child:Container(
+                padding: EdgeInsets.all(10.0),
                   child:Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -202,24 +209,24 @@ class MainFeedWidget extends StatelessWidget{
                           )
                       )
                     ],
-                  ),
-                ),
-                Container(
-                    padding: EdgeInsets.all(10.0),
-                    color: Colors.white,
-                    child:
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        Text(item.description),
-                      ],
-                    )
-                ),
-              ],
-            ),
-          )
-      ),
+                 ),
+               ),
+              ),
+              Container(
+                  padding: EdgeInsets.all(10.0),
+                  color: Colors.white,
+                  child:
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Text(item.description),
+                    ],
+                  )
+              ),
+            ],
+          ),
+        )
     );
   }
 }
