@@ -5,10 +5,11 @@
   - for internal functioning
 */
 class Constants{
-  static final String spref_username = "username";
+  static final String spref_username = "usernamex";
   static final String spref_key      = "key";
 
-  static final String hostname = "https://zinc-advice-242819.appspot.com";
+  //static final String hostname = "https://zinc-advice-242819.appspot.com";
+  static final String hostname = "http://192.168.0.112:8000";
 
   static final String url_registration = hostname + "/cliq_backend/register";
   static final String url_imageUpload  = hostname + "/cliq_backend/image_upload";
@@ -20,6 +21,7 @@ class Constants{
   static final String uImage = "image";
   static final String uDescription = "description";
   static final String uPostId = "postId";
+  static final String uTimestamp = "timestamp";
 
   static final String dUsername = "username";
   static final String dKey      = "lastkey";
@@ -27,6 +29,7 @@ class Constants{
   static final String dDescription = "description";
   static final String dBase64String = "b64string";
   static final String dPostId = "postId";
+  static final String dTimestamp = "timestamp";
 
 
 

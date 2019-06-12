@@ -8,6 +8,7 @@ class FeedItem{
   String description;
   String username;
   String b64string;
+  String timestamp;
   Uint8List imageBytes;
 
   FeedItem.fromJson(Map<String, dynamic> json)
@@ -16,5 +17,6 @@ class FeedItem{
         description = json[Constants.dDescription],
         username = json[Constants.dUsername],
         b64string = json[Constants.dBase64String],
-        imageBytes = base64Decode(json[Constants.dBase64String]);
+        imageBytes = base64Decode(json[Constants.dBase64String]),
+        timestamp = json[Constants.dTimestamp];
 }

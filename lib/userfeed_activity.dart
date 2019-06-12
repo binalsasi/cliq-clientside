@@ -17,9 +17,13 @@ class _UserFeedActivityState extends State<UserFeedActivity> with AutomaticKeepA
   final GlobalKey<RefreshIndicatorState> feedRefreshKey = new GlobalKey<RefreshIndicatorState>();
 
 
-  Future<List<FeedItem>> fetchMyFeeds() async {
+  Future<List<FeedItem>> fetchMyFeeds(String timestamp) async {
+    if(timestamp == null)
+      timestamp = "null";
+
     final response = await http.post(Constants.url_fetchFeeds, body: {
       Constants.uUsername: MainActivity.username,
+      Constants.uTimestamp: timestamp,
     });
 
     print(response.body);
@@ -52,9 +56,28 @@ class _UserFeedActivityState extends State<UserFeedActivity> with AutomaticKeepA
   }
 
   Future<Null> _refresh(){
-    return fetchMyFeeds().then((listOfItems){
+    return fetchMyFeeds(null).then((listOfItems){
       setState((){
-        feeds = listOfItems;
+        if(feeds == null)
+          feeds = listOfItems;
+        else
+          feeds.addAll(listOfItems);
+      });
+    });
+  }
+
+  void fetchMore(String timestamp){
+    fetchMyFeeds(timestamp).then((listOfItems){
+      setState((){
+        if(listOfItems != null) {
+          if (feeds == null)
+            feeds = listOfItems;
+          else
+            feeds.addAll(listOfItems);
+        }
+        else{
+          Scaffold.of(context).showSnackBar(new SnackBar(content: Text("No more feeds to show")));
+        }
       });
     });
   }
@@ -80,14 +103,44 @@ class _UserFeedActivityState extends State<UserFeedActivity> with AutomaticKeepA
                   ]
               ) :
               ListView.builder(
-                itemCount: feeds.length,
+                itemCount: feeds.length + 1,
                 itemBuilder: (context, position){
-                  return MainFeedWidget(item : feeds[position]);
+                  if(position == feeds.length)
+                    return Container(
+                      padding: EdgeInsets.only(bottom: 20.0),
+                      child: FetchMoreWidget(item : feeds[position - 1], fetchMore: fetchMore,),
+                    );
+                  else
+                    return MainFeedWidget(item : feeds[position]);
                 }
               ),
+
       ),
     );
   }
+}
+
+class FetchMoreWidget extends StatelessWidget{
+  FeedItem item;
+  Function fetchMore;
+
+  FetchMoreWidget({Key key, this.item, this.fetchMore}) : super(key : key);
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return Container(
+      child: Center(
+        child: RaisedButton(
+          child: Text("Show More"),
+            onPressed: () {
+              fetchMore(item.timestamp);
+            }
+    ),
+    ),
+    );
+    }
+
 }
 
 

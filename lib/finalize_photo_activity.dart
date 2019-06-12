@@ -138,8 +138,8 @@ class _FinalizePhotoFormState extends State<FinalizePhotoForm> {
                       child:RaisedButton(
                         child: Text(Strings.str_post),
                         onPressed: (){
-                          _sendImage();
                           Navigator.pop(context);
+                          _sendImage();
                         },
                       )
                   ),
