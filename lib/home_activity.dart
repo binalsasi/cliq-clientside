@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'upload_image_activity.dart';
 import 'userhome_activity.dart';
 import 'userfeed_activity.dart';
+import 'requests_activity.dart';
 
 import 'constants.dart';
 
@@ -47,6 +48,14 @@ class _HomeActivityState extends State<HomeActivity> with AutomaticKeepAliveClie
               Tab(icon: Icon(Icons.add_a_photo),),
             ]),
             */
+            actions: <Widget>[
+              IconButton(
+                icon: Icon(Icons.person_add),
+                onPressed: (){
+                  Navigator.pushNamed(context, RequestsActivity.route);
+                },
+              )
+            ],
             title: Text(Strings.title_HomeActivity),
           ),
           body: TabBarView(children: [

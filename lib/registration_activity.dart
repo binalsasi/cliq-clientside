@@ -30,8 +30,8 @@ class _RegistrationActivity extends State<RegistrationActivity> {
         prefs.setString(Constants.spref_username, user1);
         prefs.setInt(Constants.spref_key, lk1);
 
-        MainActivity.username = user1;
-        MainActivity.ukey = lk1;
+        MainActivity.myProfile.profileId = user1;
+        MainActivity.myProfile.ukey = lk1;
 
         Navigator.pushReplacementNamed(context, HomeActivity.route);
       }

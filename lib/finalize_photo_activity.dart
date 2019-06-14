@@ -71,7 +71,7 @@ class _FinalizePhotoFormState extends State<FinalizePhotoForm> {
     http.post(Constants.url_imageUpload, body: {
       Constants.uImage : base64Image,
       Constants.uDescription  : description,
-      Constants.uUsername : MainActivity.username,
+      Constants.uUsername : MainActivity.myProfile.profileId,
     }).then((res) {
       print(res.statusCode);
       if(res.statusCode == 200) {

@@ -6,7 +6,9 @@ import 'main_activity.dart';
 import 'home_activity.dart';
 import 'finalize_photo_activity.dart';
 import 'postdetails_activity.dart';
+import 'profile_activity.dart';
 import 'constants.dart';
+import 'requests_activity.dart';
 
 
 void main() => runApp(MyApp());
@@ -55,6 +57,8 @@ class MyApp extends StatelessWidget {
         RegistrationActivity.route:  (context) => RegistrationActivity(),
         FinalizePhotoActivity.route: (context) => FinalizePhotoActivity(),
         PostDetailsActivity.route:   (context) => PostDetailsActivity(),
+        ProfileActivity.route:       (context) => ProfileActivity(),
+        RequestsActivity.route:      (context) => RequestsActivity(),
       },
     );
   }

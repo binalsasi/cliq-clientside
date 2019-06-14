@@ -5,23 +5,34 @@
   - for internal functioning
 */
 class Constants{
-  static final String spref_username = "usernamex";
+  static final String spref_username = "usernamex1";
   static final String spref_key      = "key";
 
   //static final String hostname = "https://zinc-advice-242819.appspot.com";
-  static final String hostname = "http://192.168.0.112:8000";
+  static final String hostname = "http://192.168.0.133:8000";
 
-  static final String url_registration = hostname + "/cliq_backend/register";
-  static final String url_imageUpload  = hostname + "/cliq_backend/image_upload";
-  static final String url_fetchHome    = hostname + "/cliq_backend/fetch_home";
-  static final String url_fetchFeeds   = hostname + "/cliq_backend/fetch_feeds";
-  static final String url_fetchPost    = hostname + "/cliq_backend/fetch_post";
+  static final String url_registration    = hostname + "/cliq_backend/register";
+  static final String url_imageUpload     = hostname + "/cliq_backend/image_upload";
+  static final String url_fetchHome       = hostname + "/cliq_backend/fetch_home";
+  static final String url_fetchFeeds      = hostname + "/cliq_backend/fetch_feeds";
+  static final String url_fetchPost       = hostname + "/cliq_backend/fetch_post";
+  static final String url_fetchProfile    = hostname + "/cliq_backend/fetch_profile";
+  static final String url_followRequest   = hostname + "/cliq_backend/follow_request";
+  static final String url_unfollowRequest = hostname + "/cliq_backend/unfollow_request";
+  static final String url_getFollowers    = hostname + "/cliq_backend/get_followers_list";
+  static final String url_getFollowings   = hostname + "/cliq_backend/get_followings_list";
+  static final String url_fetchRequests   = hostname + "/cliq_backend/fetch_requests";
+  static final String url_followRequestAction   = hostname + "/cliq_backend/follow_request_action";
+
 
   static final String uUsername = "username";
   static final String uImage = "image";
   static final String uDescription = "description";
   static final String uPostId = "postId";
   static final String uTimestamp = "timestamp";
+  static final String uProfileId = "profileId";
+  static final String uFollowee = "followee";
+  static final String uAction = "action";
 
   static final String dUsername = "username";
   static final String dKey      = "lastkey";
@@ -30,6 +41,11 @@ class Constants{
   static final String dBase64String = "b64string";
   static final String dPostId = "postId";
   static final String dTimestamp = "timestamp";
+  static final String dProfileId = "profileId";
+  static final String dThumbs = "thumblist";
+  static final String dFollower = "follower";
+  static final String dFollowee = "followee";
+  static final String dFollowStatus = "status";
 
 
 
@@ -39,13 +55,27 @@ class Constants{
   static final String route_UploadImageActivity = "/HomeActivity/UploadImageActivity";
   static final String route_FinalizePhotoActivity = "/HomeActivity/UploadImageActivity/FinalizePhoto";
   static final String route_PostDetailsActivity = "/HomeActivity/PostDetailsActivity";
+  static final String route_ProfileActivity = "/HomeActivity/ProfileActivity";
+  static final String route_RequestsActivity = "/HomeActivity/RequestsActivity";
 
   static final String image_selectImage = "assets/images/select_image.png";
 
   static final String ok = "ok";
 
+  // TODO change the ecodes to be obtainable from server. Then use them using a function.
+  // TODO this can also be implemented for strings.
+
   static final String ecode_noFeeds = "E:0x80003";
   static final String ecode_noSuchPost = "E:0x80004";
+  static final String ecode_imageExists		= "E:0x70001";
+  static final String ecode_usernameAlreadyExists	= "E:0x80001";
+  static final String ecode_emptyUsername 		= "E:0x80002";
+  static final String ecode_noSuchUser		= "E:0x80004";
+  static final String ecode_notPost 			= "E:0x90001";
+  static final String ecode_unableFollow		= "E:0x80005";
+  static final String ecode_alreadyFollow		= "E:0x80006";
+  static final String ecode_notFollowed		= "E:0x80007";
+  static final String ecode_noFollowers		= "E:0x80008";
 }
 
 /*
@@ -60,6 +90,7 @@ class Strings{
   static final String title_UploadImageActivity = "Post Photo";
   static final String title_HomeActivity = "Cliq";
   static final String title_PostDetails = "Post Details";
+  static final String title_RequestsActivity = "Follow Requests you've got";
 
   static final String str_signup = "Sign Up";
   static final String str_tryPhotoUploadAgain = "There was an error while posting the photo. Try again?";
@@ -70,4 +101,9 @@ class Strings{
   static final String str_noHomeFeeds = "You have not uploaded anything yet";
   static final String str_noFeeds = "There is no feed to show";
   static final String str_noSuchPost = "We couldn't find the post you were looking for";
+  static final String str_noSuchUser = "We couldn't find the user you were looking for";
+  static final String str_unableToFollow = "We couldn't process your follow request at the moment.";
+  static final String str_notFollowed = "You are not following this user";
+  static final String str_alreadyFollowed = "You are already following this user";
+  static final String str_notPost = "Something went wrong. No data was found / invalid request.";
 }

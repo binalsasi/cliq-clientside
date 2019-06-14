@@ -22,7 +22,7 @@ class _UserHomeActivityState extends State<UserHomeActivity> with AutomaticKeepA
 
   Future<http.Response> fetchMyHome() async{
       return http.post(Constants.url_fetchHome, body: {
-        Constants.uUsername : MainActivity.username,
+        Constants.uUsername : MainActivity.myProfile.profileId,
       });
   }
 

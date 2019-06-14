@@ -23,7 +23,7 @@ class _UserFeedActivityState extends State<UserFeedActivity> with AutomaticKeepA
       timestamp = "null";
 
     final response = await http.post(Constants.url_fetchFeeds, body: {
-      Constants.uUsername: MainActivity.username,
+      Constants.uUsername: MainActivity.myProfile.profileId,
       Constants.uTimestamp: timestamp,
     });
 
