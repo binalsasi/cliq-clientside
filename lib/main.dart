@@ -9,6 +9,8 @@ import 'postdetails_activity.dart';
 import 'profile_activity.dart';
 import 'constants.dart';
 import 'requests_activity.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 
 void main() => runApp(MyApp());
@@ -42,8 +44,26 @@ void main() => runApp(MyApp());
  */
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
+
+
+
+  // not an async function!
+  void getCodes(){
+    http.post(Constants.url_fetchCodeBase).then((response){
+      // handle basic error codes
+      print("SADDD");
+      print(response.body);
+
+      final body = response.body;
+      final codeJson = jsonDecode(body);
+      Constants.setCodeBase(codeJson);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    getCodes();
+
     return MaterialApp(
       title: Strings.title_App,
       theme: ThemeData(

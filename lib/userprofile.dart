@@ -14,8 +14,8 @@ class UserProfile{
   int ukey;
 
   UserProfile.fromJson(Map<String, dynamic> json){
-    profileId = json[Constants.dProfileId];
-    final imglist = json[Constants.dThumbs];
+    profileId = json[Constants.getCode("dProfileId")];
+    final imglist = json[Constants.getCode("dThumbs")];
     if(imglist == "E:0x80003"){
       imageList = null;
       imageCount = 0;

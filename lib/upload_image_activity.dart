@@ -33,6 +33,9 @@ class _UploadImageActivityState extends State<UploadImageActivity> {
   @override
   Widget build(BuildContext context) {
     scaffoldKey = ModalRoute.of(context).settings.arguments;
+
+    print(Constants.getCode("uUsername"));
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(

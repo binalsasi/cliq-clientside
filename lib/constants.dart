@@ -11,6 +11,7 @@ class Constants{
   //static final String hostname = "https://zinc-advice-242819.appspot.com";
   static final String hostname = "http://192.168.0.133:8000";
 
+  static final String url_fetchCodeBase    = hostname + "/cliq_backend/fetch_code_base";
   static final String url_registration    = hostname + "/cliq_backend/register";
   static final String url_imageUpload     = hostname + "/cliq_backend/image_upload";
   static final String url_fetchHome       = hostname + "/cliq_backend/fetch_home";
@@ -24,30 +25,31 @@ class Constants{
   static final String url_fetchRequests   = hostname + "/cliq_backend/fetch_requests";
   static final String url_followRequestAction   = hostname + "/cliq_backend/follow_request_action";
 
+  static dynamic codebase;
+  static dynamic defaultCodeBase = {
+    "uUsername": "username",
+    "uProfileId": "profileId",
+    "ecode_noSuchUser": "E:0x80004",
+    "ecode_noFollowers": "E:0x80008",
+    "ecode_notPost": "E:0x90001",
+    "dFollowStatus": "status",
+    "dFollower": "follower",
+    "dFollowee": "followee",
+    "uTimestamp": "timestamp",
+    "ecode_noFeeds": "E:0x80003",
+  };
 
-  static final String uUsername = "username";
-  static final String uImage = "image";
-  static final String uDescription = "description";
-  static final String uPostId = "postId";
-  static final String uTimestamp = "timestamp";
-  static final String uProfileId = "profileId";
-  static final String uFollowee = "followee";
-  static final String uAction = "action";
+  static void setCodeBase(dynamic codes){
+    codebase = codes;
+  }
 
-  static final String dUsername = "username";
-  static final String dKey      = "lastkey";
-  static final String dPath = "path";
-  static final String dDescription = "description";
-  static final String dBase64String = "b64string";
-  static final String dPostId = "postId";
-  static final String dTimestamp = "timestamp";
-  static final String dProfileId = "profileId";
-  static final String dThumbs = "thumblist";
-  static final String dFollower = "follower";
-  static final String dFollowee = "followee";
-  static final String dFollowStatus = "status";
+  static String getCode(String type){
 
+    if(codebase == null)
+      return defaultCodeBase[type];
 
+    return codebase[type];
+  }
 
   static final String route_MainActivity = "/";
   static final String route_RegistrationActivity = "/RegistrationActivity";
@@ -59,23 +61,6 @@ class Constants{
   static final String route_RequestsActivity = "/HomeActivity/RequestsActivity";
 
   static final String image_selectImage = "assets/images/select_image.png";
-
-  static final String ok = "ok";
-
-  // TODO change the ecodes to be obtainable from server. Then use them using a function.
-  // TODO this can also be implemented for strings.
-
-  static final String ecode_noFeeds = "E:0x80003";
-  static final String ecode_noSuchPost = "E:0x80004";
-  static final String ecode_imageExists		= "E:0x70001";
-  static final String ecode_usernameAlreadyExists	= "E:0x80001";
-  static final String ecode_emptyUsername 		= "E:0x80002";
-  static final String ecode_noSuchUser		= "E:0x80004";
-  static final String ecode_notPost 			= "E:0x90001";
-  static final String ecode_unableFollow		= "E:0x80005";
-  static final String ecode_alreadyFollow		= "E:0x80006";
-  static final String ecode_notFollowed		= "E:0x80007";
-  static final String ecode_noFollowers		= "E:0x80008";
 }
 
 /*

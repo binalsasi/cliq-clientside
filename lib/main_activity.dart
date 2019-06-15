@@ -22,20 +22,24 @@ class MainActivity extends StatefulWidget{
 
   static UserProfile myProfile = new UserProfile();
 
+  Future<http.Response> getCodes() async{
+    return http.post(Constants.url_fetchCodeBase);
+  }
+
 
   static void getFollowers() async{
     http.post(Constants.url_getFollowers, body: {
-      Constants.uUsername : MainActivity.myProfile.profileId,
-      Constants.uProfileId: MainActivity.myProfile.profileId,
+      Constants.getCode("uUsername") : MainActivity.myProfile.profileId,
+      Constants.getCode("uProfileId"): MainActivity.myProfile.profileId,
     }).then((response){
       print(response.body);
-      if(response.body == Constants.ecode_noSuchUser){
+      if(response.body == Constants.getCode("ecode_noSuchUser")){
         // do nothing?
       }
-      else if(response.body == Constants.ecode_noFollowers){
+      else if(response.body == Constants.getCode("ecode_noFollowers")){
         // do nothing?
       }
-      else if(response.body == Constants.ecode_notPost){
+      else if(response.body == Constants.getCode("ecode_notPost")){
         // do nothing?
       }
       else{
@@ -43,8 +47,8 @@ class MainActivity extends StatefulWidget{
 
         list.forEach((item){
           UserProfile aProfile = new UserProfile();
-          aProfile.followStatus = item[Constants.dFollowStatus];
-          aProfile.profileId    = item[Constants.dFollower];
+          aProfile.followStatus = item[Constants.getCode("dFollowStatus")];
+          aProfile.profileId    = item[Constants.getCode("dFollower")];
           MainActivity.myProfile.addFollower(aProfile);
         });
       }
@@ -53,17 +57,17 @@ class MainActivity extends StatefulWidget{
 
   static void getFollowings() async{
     http.post(Constants.url_getFollowings, body: {
-      Constants.uUsername : MainActivity.myProfile.profileId,
-      Constants.uProfileId: MainActivity.myProfile.profileId,
+      Constants.getCode("uUsername") : MainActivity.myProfile.profileId,
+      Constants.getCode("uProfileId"): MainActivity.myProfile.profileId,
     }).then((response){
       print(response.body);
-      if(response.body == Constants.ecode_noSuchUser){
+      if(response.body == Constants.getCode("ecode_noSuchUser")){
         // do nothing?
       }
-      else if(response.body == Constants.ecode_noFollowers){
+      else if(response.body == Constants.getCode("ecode_noFollowers")){
         // do nothing?
       }
-      else if(response.body == Constants.ecode_notPost){
+      else if(response.body == Constants.getCode("ecode_notPost")){
         // do nothing?
       }
       else{
@@ -71,8 +75,8 @@ class MainActivity extends StatefulWidget{
 
         list.forEach((item){
           UserProfile aProfile = new UserProfile();
-          aProfile.followStatus = item[Constants.dFollowStatus];
-          aProfile.profileId    = item[Constants.dFollowee];
+          aProfile.followStatus = item[Constants.getCode("dFollowStatus")];
+          aProfile.profileId    = item[Constants.getCode("dFollowee")];
           MainActivity.myProfile.addFollowing(aProfile);
         });
       }
@@ -102,16 +106,46 @@ class _MainActivityState extends State<MainActivity>{
     });
   }
 
-
+  Future<http.Response> codeStatus;
 
   @override
   void initState(){
     super.initState();
+    codeStatus = widget.getCodes();
     checkUser();
   }
 
   @override
   Widget build(BuildContext context) {
-    return HomeActivity();
+    return FutureBuilder(
+      future: codeStatus,
+      builder: (BuildContext context, AsyncSnapshot snapshot){
+
+        if (!snapshot.hasData) {
+          return new CircularProgressIndicator();
+        } else {
+          switch (snapshot.connectionState) {
+            case ConnectionState.waiting: return new CircularProgressIndicator();
+            default:
+              if (snapshot.hasError)
+                return new Text('Error: ${snapshot.error}');
+              else {
+                http.Response result = snapshot.data;
+                print("DDDDD");
+                print(result.body);
+                if(result.body == "E:0x80004")
+                  return Center(
+                    child: Text("404x Profile Not Found"),
+                  );
+
+                final codeJson = jsonDecode(result.body);
+                Constants.setCodeBase(codeJson);
+
+                return HomeActivity();
+              }
+          }
+        }
+      },
+    );
   }
 }

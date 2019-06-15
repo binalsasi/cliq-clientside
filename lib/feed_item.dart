@@ -12,11 +12,11 @@ class FeedItem{
   Uint8List imageBytes;
 
   FeedItem.fromJson(Map<String, dynamic> json)
-      : pid = json[Constants.dPostId].toString(),
-        path = json[Constants.dPath],
-        description = json[Constants.dDescription],
-        username = json[Constants.dUsername],
-        b64string = json[Constants.dBase64String],
-        imageBytes = base64Decode(json[Constants.dBase64String]),
-        timestamp = json[Constants.dTimestamp];
+      : pid = json[Constants.getCode("dPostId")].toString(),
+        path = json[Constants.getCode("dPath")],
+        description = json[Constants.getCode("dDescription")],
+        username = json[Constants.getCode("dUsername")],
+        b64string = json[Constants.getCode("dBase64String")],
+        imageBytes = base64Decode(json[Constants.getCode("dBase64String")]),
+        timestamp = json[Constants.getCode("dTimestamp")];
 }

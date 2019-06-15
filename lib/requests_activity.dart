@@ -22,7 +22,7 @@ class _RequestsActivityState extends State<RequestsActivity> with AutomaticKeepA
 
   Future<http.Response> fetchRequests() async{
     return http.post(Constants.url_fetchRequests, body: {
-      Constants.uUsername : MainActivity.myProfile.profileId,
+      Constants.getCode("uUsername") : MainActivity.myProfile.profileId,
     });
   }
 
@@ -35,9 +35,9 @@ class _RequestsActivityState extends State<RequestsActivity> with AutomaticKeepA
   Future sendRequestAction(String profileId, String action) async{
     print("a");
     http.post(Constants.url_followRequestAction, body: {
-      Constants.uUsername :  MainActivity.myProfile.profileId,
-      Constants.uProfileId:  profileId,
-      Constants.uAction:    action,
+      Constants.getCode("uUsername") :  MainActivity.myProfile.profileId,
+      Constants.getCode("uProfileId"):  profileId,
+      Constants.getCode("uAction"):    action,
     }).then((response){
       print(response.body);
       if(response.body == "ok"){
@@ -98,8 +98,8 @@ class _RequestsActivityState extends State<RequestsActivity> with AutomaticKeepA
                     requests = new List();
                     rqlist.forEach((request){
                       UserProfile temp = new UserProfile();
-                      temp.profileId = request[Constants.dFollower];
-                      temp.followStatus = request[Constants.dFollowStatus];
+                      temp.profileId = request[Constants.getCode("dFollower")];
+                      temp.followStatus = request[Constants.getCode("dFollowStatus")];
                       requests.add(temp);
                     });
 

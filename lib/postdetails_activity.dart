@@ -17,12 +17,12 @@ class _PostDetailsActivityState extends State<PostDetailsActivity>{
 
   Future<FeedItem> _fetchItem() async{
     final response = await http.post(Constants.url_fetchPost, body: {
-      Constants.uPostId : _pid,
+      Constants.getCode("uPostId") : _pid,
     });
 
     print(response.body);
 
-    if(response.body == Constants.ecode_noSuchPost){
+    if(response.body == Constants.getCode("ecode_noSuchPost")){
       // no such post exists
       return null;
     }

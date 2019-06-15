@@ -69,9 +69,9 @@ class _FinalizePhotoFormState extends State<FinalizePhotoForm> {
     //String base64Image = base64Encode(widget.image.readAsBytesSync());
     String description = descController.text;
     http.post(Constants.url_imageUpload, body: {
-      Constants.uImage : base64Image,
-      Constants.uDescription  : description,
-      Constants.uUsername : MainActivity.myProfile.profileId,
+      Constants.getCode("uImage") : base64Image,
+      Constants.getCode("uDescription")  : description,
+      Constants.getCode("uUsername") : MainActivity.myProfile.profileId,
     }).then((res) {
       print(res.statusCode);
       if(res.statusCode == 200) {
@@ -125,7 +125,7 @@ class _FinalizePhotoFormState extends State<FinalizePhotoForm> {
                         autofocus: true,
                         controller: descController,
                         validator: (value) {
-                          return Constants.ok;
+                          return Constants.getCode("OK");
                         },
                       ),
                     ),

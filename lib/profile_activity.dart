@@ -21,8 +21,8 @@ class _ProfileActivityState extends State<ProfileActivity> with AutomaticKeepAli
 
   Future<http.Response> fetchProfile(String username) async{
     return http.post(Constants.url_fetchProfile, body: {
-      Constants.uUsername : MainActivity.myProfile.profileId,
-      Constants.uProfileId : username,
+      Constants.getCode("uUsername") : MainActivity.myProfile.profileId,
+      Constants.getCode("uProfileId") : username,
     });
   }
 
@@ -168,23 +168,23 @@ class _ProfileActivityState extends State<ProfileActivity> with AutomaticKeepAli
       url = Constants.url_unfollowRequest;
 
     http.post(url, body: {
-      Constants.uUsername : MainActivity.myProfile.profileId,
-      Constants.uFollowee : profile.profileId,
+      Constants.getCode("uUsername") : MainActivity.myProfile.profileId,
+      Constants.getCode("uFollowee") : profile.profileId,
     }).then((response){
       final body = response.body;
-      if(body == Constants.ecode_noSuchUser){
+      if(body == Constants.getCode("ecode_noSuchUser")){
         Scaffold.of(context).showSnackBar(new SnackBar(content: Text(Strings.str_noSuchUser)));
       }
-      else if(body == Constants.ecode_unableFollow){
+      else if(body == Constants.getCode("ecode_unableFollow")){
         Scaffold.of(context).showSnackBar(new SnackBar(content: Text(Strings.str_unableToFollow)));
       }
-      else if(body == Constants.ecode_notFollowed){
+      else if(body == Constants.getCode("ecode_notFollowed")){
         Scaffold.of(context).showSnackBar(new SnackBar(content: Text(Strings.str_notFollowed)));
       }
-      else if(body == Constants.ecode_alreadyFollow){
+      else if(body == Constants.getCode("ecode_alreadyFollow")){
         Scaffold.of(context).showSnackBar(new SnackBar(content: Text(Strings.str_alreadyFollowed)));
       }
-      else if(body == Constants.ecode_notPost){
+      else if(body == Constants.getCode("ecode_notPost")){
         Scaffold.of(context).showSnackBar(new SnackBar(content: Text(Strings.str_notPost)));
       }
       else{
