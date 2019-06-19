@@ -11,6 +11,7 @@ import 'constants.dart';
 import 'requests_activity.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'usersearch_activity.dart';
 
 
 void main() => runApp(MyApp());
@@ -79,6 +80,7 @@ class MyApp extends StatelessWidget {
         PostDetailsActivity.route:   (context) => PostDetailsActivity(),
         ProfileActivity.route:       (context) => ProfileActivity(),
         RequestsActivity.route:      (context) => RequestsActivity(),
+        UserSearchActivity.route:    (context) => UserSearchActivity(),
       },
     );
   }

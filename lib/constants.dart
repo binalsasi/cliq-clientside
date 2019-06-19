@@ -11,19 +11,20 @@ class Constants{
   //static final String hostname = "https://zinc-advice-242819.appspot.com";
   static final String hostname = "http://192.168.0.133:8000";
 
-  static final String url_fetchCodeBase    = hostname + "/cliq_backend/fetch_code_base";
-  static final String url_registration    = hostname + "/cliq_backend/register";
-  static final String url_imageUpload     = hostname + "/cliq_backend/image_upload";
-  static final String url_fetchHome       = hostname + "/cliq_backend/fetch_home";
-  static final String url_fetchFeeds      = hostname + "/cliq_backend/fetch_feeds";
-  static final String url_fetchPost       = hostname + "/cliq_backend/fetch_post";
-  static final String url_fetchProfile    = hostname + "/cliq_backend/fetch_profile";
-  static final String url_followRequest   = hostname + "/cliq_backend/follow_request";
-  static final String url_unfollowRequest = hostname + "/cliq_backend/unfollow_request";
-  static final String url_getFollowers    = hostname + "/cliq_backend/get_followers_list";
-  static final String url_getFollowings   = hostname + "/cliq_backend/get_followings_list";
-  static final String url_fetchRequests   = hostname + "/cliq_backend/fetch_requests";
-  static final String url_followRequestAction   = hostname + "/cliq_backend/follow_request_action";
+  static final String url_fetchCodeBase       = hostname + "/cliq_backend/fetch_code_base";
+  static final String url_registration        = hostname + "/cliq_backend/register";
+  static final String url_imageUpload         = hostname + "/cliq_backend/image_upload";
+  static final String url_fetchHome           = hostname + "/cliq_backend/fetch_home";
+  static final String url_fetchFeeds          = hostname + "/cliq_backend/fetch_feeds";
+  static final String url_fetchPost           = hostname + "/cliq_backend/fetch_post";
+  static final String url_fetchProfile        = hostname + "/cliq_backend/fetch_profile";
+  static final String url_followRequest       = hostname + "/cliq_backend/follow_request";
+  static final String url_unfollowRequest     = hostname + "/cliq_backend/unfollow_request";
+  static final String url_getFollowers        = hostname + "/cliq_backend/get_followers_list";
+  static final String url_getFollowings       = hostname + "/cliq_backend/get_followings_list";
+  static final String url_fetchRequests       = hostname + "/cliq_backend/fetch_requests";
+  static final String url_followRequestAction = hostname + "/cliq_backend/follow_request_action";
+  static final String url_searchUsername      = hostname + "/cliq_backend/search_username";
 
   static dynamic codebase;
   static dynamic defaultCodeBase = {
@@ -59,6 +60,7 @@ class Constants{
   static final String route_PostDetailsActivity = "/HomeActivity/PostDetailsActivity";
   static final String route_ProfileActivity = "/HomeActivity/ProfileActivity";
   static final String route_RequestsActivity = "/HomeActivity/RequestsActivity";
+  static final String route_UserSearchActivity = "/HomeActivity/UserSearchActivity";
 
   static final String image_selectImage = "assets/images/select_image.png";
 }
@@ -76,6 +78,7 @@ class Strings{
   static final String title_HomeActivity = "Cliq";
   static final String title_PostDetails = "Post Details";
   static final String title_RequestsActivity = "Follow Requests you've got";
+  static final String title_UserSearchActivity = "Search Users";
 
   static final String str_signup = "Sign Up";
   static final String str_tryPhotoUploadAgain = "There was an error while posting the photo. Try again?";
