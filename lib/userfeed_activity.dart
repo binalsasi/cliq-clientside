@@ -4,8 +4,7 @@ import 'feed_item.dart';
 import 'constants.dart';
 import 'main_activity.dart';
 import 'dart:convert';
-import 'postdetails_activity.dart';
-import 'profile_activity.dart';
+import 'feed_widget.dart';
 
 class UserFeedActivity extends StatefulWidget {
   @override
@@ -126,7 +125,7 @@ class _UserFeedActivityState extends State<UserFeedActivity> with AutomaticKeepA
                       child: FetchMoreWidget(item : feeds[position - 1], fetchMore: fetchMore,),
                     );
                   else
-                    return MainFeedWidget(item : feeds[position]);
+                    return FeedWidget(item : feeds[position]);
                 }
               ),
 
@@ -158,89 +157,3 @@ class FetchMoreWidget extends StatelessWidget{
 
 }
 
-
-class MainFeedWidget extends StatelessWidget{
-  FeedItem item;
-
-  MainFeedWidget({Key key, this.item}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-
-    return Container(
-        margin: EdgeInsets.only(bottom: 10.0),
-        padding: EdgeInsets.all(10.0),
-        child: Container(
-          decoration: new BoxDecoration(
-              border: new Border.all(color: Colors.white)
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              GestureDetector(
-                onTap: (){
-                  Navigator.pushNamed(context, ProfileActivity.route,arguments: item.username);
-                },
-                child: Container(
-                  padding: EdgeInsets.all(10.0),
-                  color: Colors.white,
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      RichText(
-                          text: new TextSpan(
-                            text: item.username,
-                            style: TextStyle(
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black87,
-
-                            ),
-                          )
-                      )
-
-                    ],
-                  ),
-                ),
-              ),
-              GestureDetector(
-                onTap: (){
-                  Navigator.pushNamed(context, PostDetailsActivity.route,arguments: item.pid);
-                },
-                child:Container(
-                padding: EdgeInsets.all(10.0),
-                  child:Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      SizedBox(
-                          height: MediaQuery.of(context).size.width*0.7,
-                          width: MediaQuery.of(context).size.width*0.7,
-                          child: SizedBox.expand(
-                            child:Image.memory(item.imageBytes),
-                          )
-                      )
-                    ],
-                 ),
-               ),
-              ),
-              Container(
-                  padding: EdgeInsets.all(10.0),
-                  color: Colors.white,
-                  child:
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Text(item.description),
-                    ],
-                  )
-              ),
-            ],
-          ),
-        )
-    );
-  }
-}

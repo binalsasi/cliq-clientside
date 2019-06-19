@@ -25,6 +25,8 @@ class Constants{
   static final String url_fetchRequests       = hostname + "/cliq_backend/fetch_requests";
   static final String url_followRequestAction = hostname + "/cliq_backend/follow_request_action";
   static final String url_searchUsername      = hostname + "/cliq_backend/search_username";
+  static final String url_likePost            = hostname + "/cliq_backend/likes_post";
+  static final String url_unlikePost            = hostname + "/cliq_backend/unlikes_post";
 
   static dynamic codebase;
   static dynamic defaultCodeBase = {
