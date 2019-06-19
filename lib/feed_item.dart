@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'constants.dart';
 import 'userprofile.dart';
 import 'main_activity.dart';
+import 'comment_item.dart';
 
 class FeedItem{
   String pid;
@@ -15,6 +16,8 @@ class FeedItem{
   List<UserProfile> likes;
   bool liked = false;
   int likeCount = 0;
+  List<CommentItem> comments;
+  int commentCount = 0;
 
   FeedItem.fromJson(Map<String, dynamic> json){
     pid = json[Constants.getCode("dPostId")].toString();
@@ -40,6 +43,25 @@ class FeedItem{
           "likes " + likeCount.toString() + "  len " + likes.length.toString());
       likeCount = likes.length;
     }
+  }
+
+  void setComments(final commentJson){
+    if(comments == null)
+        comments = new List();
+    else
+        comments.clear();
+
+    commentJson.forEach((s) => comments.add(CommentItem.fromJson(s)));
+
+    commentCount = comments.length;
+  }
+
+  void addComment(String commentId, String username, String comment, String timestamp){
+    if(comments == null)
+      comments = new List();
+    CommentItem c = new CommentItem(commentId: commentId, username: username, comment: comment, timestamp: timestamp);
+    comments.add(c);
+    ++commentCount;
   }
 
   void like(bool val){

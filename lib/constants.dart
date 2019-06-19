@@ -28,6 +28,8 @@ class Constants{
   static final String url_likePost            = hostname + "/cliq_backend/likes_post";
   static final String url_unlikePost          = hostname + "/cliq_backend/unlikes_post";
   static final String url_discoverPeople      = hostname + "/cliq_backend/discover_people";
+  static final String url_getComments         = hostname + "/cliq_backend/get_comments";
+  static final String url_addComment          = hostname + "/cliq_backend/add_comment";
 
   static dynamic codebase;
   static dynamic defaultCodeBase = {
