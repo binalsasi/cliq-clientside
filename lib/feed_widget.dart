@@ -147,15 +147,16 @@ class _FeedWidgetState extends State<FeedWidget>{
                 ),
               ),
               Container(
-                color: Colors.white,
+                color: Colors.white70,
+                padding: EdgeInsets.all(10.0),
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
                     GestureDetector(
                       onTap: (){
                           likePost(widget.item.pid, !widget.item.isLiked());
                       },
                       child: Container(
-                        //color: widget.item.isLiked()? Colors.green : Colors.white,
                         padding: EdgeInsets.all(10.0),
                         child: Row(
                           children: <Widget>[
@@ -169,6 +170,7 @@ class _FeedWidgetState extends State<FeedWidget>{
                               ),
                             ),
                             Container(
+                              margin: EdgeInsets.only(left: 10.0),
                                 child: Text(widget.item.likeCount.toString()),
                             )
                           ],
@@ -188,13 +190,17 @@ class _FeedWidgetState extends State<FeedWidget>{
                         }
                       },
                       child: Container(
-                        color: showComments ? Colors.green : Colors.white,
+                        color:  Colors.white,
                         padding: EdgeInsets.all(10.0),
                         child: Row(
                           children: <Widget>[
-
                             Container(
-                              child: Icon(Icons.comment),
+                              child: IconTheme(
+                                  data: IconThemeData(
+                                    color: showComments ? Colors.green : Colors.black54,
+                                  ),
+                                  child: Icon(Icons.comment),
+                              )
                             ),
                           ],
                         ),
@@ -204,14 +210,32 @@ class _FeedWidgetState extends State<FeedWidget>{
                 ),
               ),
               Container(
-                  padding: EdgeInsets.all(10.0),
+                  padding: EdgeInsets.all(15.0),
                   color: Colors.white,
                   child:
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-                      Text(widget.item.description),
+                      Container(
+                        margin: EdgeInsets.only(right: 10.0),
+                        child: Text(
+                          widget.item.username + " : ",
+                          style: TextStyle(
+                              fontSize: 17.0,
+                            fontWeight: FontWeight.bold
+                          ),
+                        ),
+                      ),
+                      Container(
+                        child: Text(
+                          widget.item.description,
+                          style: TextStyle(
+                              fontSize: 17.0,
+                            fontStyle: FontStyle.italic
+                          ),
+                        ),
+                      )
                     ],
                   )
               ),
@@ -222,7 +246,7 @@ class _FeedWidgetState extends State<FeedWidget>{
                   :
               Container(
                 padding: EdgeInsets.all(10.0),
-                color: Colors.white,
+                color: Colors.black12,
                   child:
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -243,7 +267,7 @@ class _FeedWidgetState extends State<FeedWidget>{
                   :
               Container(
                 padding: EdgeInsets.all(10.0),
-                color: Colors.white,
+                color: Colors.black12,
                 child: createCommentColumn(),
               )
 
@@ -254,6 +278,7 @@ class _FeedWidgetState extends State<FeedWidget>{
                 color: Colors.white,
                 padding: EdgeInsets.all(10.0),
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
                     Container(
                       child: SizedBox(
