@@ -26,7 +26,8 @@ class Constants{
   static final String url_followRequestAction = hostname + "/cliq_backend/follow_request_action";
   static final String url_searchUsername      = hostname + "/cliq_backend/search_username";
   static final String url_likePost            = hostname + "/cliq_backend/likes_post";
-  static final String url_unlikePost            = hostname + "/cliq_backend/unlikes_post";
+  static final String url_unlikePost          = hostname + "/cliq_backend/unlikes_post";
+  static final String url_discoverPeople      = hostname + "/cliq_backend/discover_people";
 
   static dynamic codebase;
   static dynamic defaultCodeBase = {
@@ -63,6 +64,7 @@ class Constants{
   static final String route_ProfileActivity = "/HomeActivity/ProfileActivity";
   static final String route_RequestsActivity = "/HomeActivity/RequestsActivity";
   static final String route_UserSearchActivity = "/HomeActivity/UserSearchActivity";
+  static final String route_DiscoverPeopleActivity = "/HomeActivity/DiscoverPeopleActivity";
 
   static final String image_selectImage = "assets/images/select_image.png";
 }
@@ -81,6 +83,7 @@ class Strings{
   static final String title_PostDetails = "Post Details";
   static final String title_RequestsActivity = "Follow Requests you've got";
   static final String title_UserSearchActivity = "Search Users";
+  static final String title_DiscoverPeopleActivity = "Discover People";
 
   static final String str_signup = "Sign Up";
   static final String str_tryPhotoUploadAgain = "There was an error while posting the photo. Try again?";

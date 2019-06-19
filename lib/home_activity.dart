@@ -4,6 +4,7 @@ import 'userhome_activity.dart';
 import 'userfeed_activity.dart';
 import 'requests_activity.dart';
 import 'usersearch_activity.dart';
+import 'discoverpeople_activity.dart';
 
 import 'constants.dart';
 
@@ -60,6 +61,12 @@ class _HomeActivityState extends State<HomeActivity> with AutomaticKeepAliveClie
                 icon: Icon(Icons.search),
                 onPressed: (){
                   Navigator.pushNamed(context, UserSearchActivity.route);
+                },
+              ),
+              IconButton(
+                icon: Icon(Icons.accessibility_new),
+                onPressed: (){
+                  Navigator.pushNamed(context, DiscoverPeopleActivity.route);
                 },
               )
             ],

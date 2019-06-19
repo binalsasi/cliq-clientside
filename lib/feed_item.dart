@@ -25,18 +25,21 @@ class FeedItem{
     imageBytes = base64Decode(json[Constants.getCode("dBase64String")]);
     timestamp = json[Constants.getCode("dTimestamp")];
     final x = json[Constants.getCode("dLikes")];
-    likes = new List();
-    x.forEach((user){
-      UserProfile a = new UserProfile();
-      a.profileId = user;
-      likes.add(a);
+    if(x != null && x != "") {
+      likes = new List();
+      x.forEach((user) {
+        UserProfile a = new UserProfile();
+        a.profileId = user;
+        likes.add(a);
 
-      if(user == MainActivity.myProfile.profileId)
-        like(true);
-    });
+        if (user == MainActivity.myProfile.profileId)
+          like(true);
+      });
 
-    print("likes " + likeCount .toString()+ "  len "  + likes.length.toString());
-    likeCount = likes.length;
+      print(
+          "likes " + likeCount.toString() + "  len " + likes.length.toString());
+      likeCount = likes.length;
+    }
   }
 
   void like(bool val){

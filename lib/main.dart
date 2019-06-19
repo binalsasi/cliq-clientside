@@ -12,6 +12,7 @@ import 'requests_activity.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'usersearch_activity.dart';
+import 'discoverpeople_activity.dart';
 
 
 void main() => runApp(MyApp());
@@ -72,15 +73,16 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: MainActivity.route,
       routes: {
-        MainActivity.route:          (context) => MainActivity(),
-        HomeActivity.route:          (context) => HomeActivity(),
-        UploadImageActivity.route:   (context) => UploadImageActivity(),
-        RegistrationActivity.route:  (context) => RegistrationActivity(),
-        FinalizePhotoActivity.route: (context) => FinalizePhotoActivity(),
-        PostDetailsActivity.route:   (context) => PostDetailsActivity(),
-        ProfileActivity.route:       (context) => ProfileActivity(),
-        RequestsActivity.route:      (context) => RequestsActivity(),
-        UserSearchActivity.route:    (context) => UserSearchActivity(),
+        MainActivity.route:           (context) => MainActivity(),
+        HomeActivity.route:           (context) => HomeActivity(),
+        UploadImageActivity.route:    (context) => UploadImageActivity(),
+        RegistrationActivity.route:   (context) => RegistrationActivity(),
+        FinalizePhotoActivity.route:  (context) => FinalizePhotoActivity(),
+        PostDetailsActivity.route:    (context) => PostDetailsActivity(),
+        ProfileActivity.route:        (context) => ProfileActivity(),
+        RequestsActivity.route:       (context) => RequestsActivity(),
+        UserSearchActivity.route:     (context) => UserSearchActivity(),
+        DiscoverPeopleActivity.route: (context) => DiscoverPeopleActivity(),
       },
     );
   }

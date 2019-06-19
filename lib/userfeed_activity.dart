@@ -5,6 +5,7 @@ import 'constants.dart';
 import 'main_activity.dart';
 import 'dart:convert';
 import 'feed_widget.dart';
+import 'discoverpeople_activity.dart';
 
 class UserFeedActivity extends StatefulWidget {
   @override
@@ -21,15 +22,12 @@ class _UserFeedActivityState extends State<UserFeedActivity> with AutomaticKeepA
     if(timestamp == null)
       timestamp = "null";
 
-    print("username" + Constants.getCode("uUsername"));
-    print("timesatmp" + Constants.getCode("uTimestamp"));
 
     final response = await http.post(Constants.url_fetchFeeds, body: {
       Constants.getCode("uUsername") : MainActivity.myProfile.profileId,
       Constants.getCode("uTimestamp") : timestamp,
     });
 
-    print("REEESS");
     print(response.body);
 
     if(response.body == Constants.getCode("ecode_noFeeds")){
@@ -40,15 +38,6 @@ class _UserFeedActivityState extends State<UserFeedActivity> with AutomaticKeepA
     try{
       final json = jsonDecode(response.body);
       print(json);
-
-
-    print("dpostid " + Constants.getCode("dPostId"));
-      print("dpath " + Constants.getCode("dPath"));
-      print("ddesc " + Constants.getCode("dDescription"));
-      print("duser " + Constants.getCode("dUsername"));
-      print("db64s " + Constants.getCode("dBase64String"));
-      print("db64s " + Constants.getCode("dBase64String"));
-      print("dtime " + Constants.getCode("dTimestamp"));
 
       List<FeedItem> _feeds = new List();
       json.forEach((s) => _feeds.add(FeedItem.fromJson(s)));
@@ -109,7 +98,21 @@ class _UserFeedActivityState extends State<UserFeedActivity> with AutomaticKeepA
                   children: [
                     Center(
                       child: Container(
-                        child: Text(Strings.str_noFeeds),
+                        child: Column(
+                          children: <Widget>[
+                            Container(
+                              child: Text(Strings.str_noFeeds),
+                            ),
+                            Container(
+                              child: RaisedButton(
+                                  child: Text("Discover People"),
+                                  onPressed: (){
+                                    Navigator.pushNamed(context, DiscoverPeopleActivity.route);
+                                  }
+                              ),
+                            )
+                          ],
+                        ),
                         alignment: Alignment.center,
                         padding: EdgeInsets.only(top:50.0),
                       ),
