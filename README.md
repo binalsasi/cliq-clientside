@@ -2,9 +2,11 @@
 
 Cliq - A photo sharing platform made using Flutter and Django
 
-## Getting Started
+## How
 
-To make the client side working : change the hostname in lib/constants.dart to the server hostname.
+1. Install Flutter.
+2. Edit lib/constants.dart to point to the correct host
+3. Build App
 
 ## Disclaimer
 
