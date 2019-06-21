@@ -1,3 +1,9 @@
+/*
+*
+*   FeedItem place holder
+*
+ */
+
 import 'dart:convert';
 import 'dart:typed_data';
 import 'constants.dart';

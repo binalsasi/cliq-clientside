@@ -1,3 +1,9 @@
+/*
+*
+*   UserSearchActivity is the page for searching for users.
+*
+ */
+
 import 'package:flutter/material.dart';
 import 'constants.dart';
 import 'userprofile.dart';
@@ -18,6 +24,9 @@ class _UserSearchActivityState extends State<UserSearchActivity>{
 
   List<UserProfile> results;
 
+  // send username to server to search
+  // returns a list of usernames
+  // set the returned list of usernames to `results`.
   void searchUsername(String username) async{
     http.post(Constants.url_searchUsername, body: {
       Constants.getCode("uUsername") : MainActivity.myProfile.profileId,
@@ -88,19 +97,21 @@ class _UserSearchActivityState extends State<UserSearchActivity>{
               ],
             ),
 
-
+            // if the results variable is not initialized (not searched for anything)
             (results == null) ?
             Container(
               child: Text("Search something"),
             )
                 :
             (
+                // if results is initialised but no results, then no search results.
                 (results.length == 0) ?
                     Container(
                       child: Text("0 search results found"),
                     )
                 :
 
+            // if there are search results
             SizedBox(
               height: MediaQuery.of(context).size.height*0.5,
               child: ListView.builder(

@@ -1,3 +1,10 @@
+/*
+*
+*   RequestsActivity shows list of requests
+*   TODO add return code handling
+*
+ */
+
 import 'package:flutter/material.dart';
 import 'main_activity.dart';
 import 'constants.dart';
@@ -87,11 +94,10 @@ class _RequestsActivityState extends State<RequestsActivity> with AutomaticKeepA
                     return new Text('Error: ${snapshot.error}');
                   else {
                     http.Response result = snapshot.data;
-                    print("DDDDD");
-                    print(result.body);
-                    if(result.body == "E:0x80004")
+
+                    if(result.body == Constants.getCode("ecode_noRequests"))
                       return Center(
-                        child: Text("404x Profile Not Found"),
+                        child: Text("No Requests"),
                       );
 
                     final rqlist = jsonDecode(result.body);

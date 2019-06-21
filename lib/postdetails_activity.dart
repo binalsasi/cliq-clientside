@@ -1,3 +1,9 @@
+/*
+*
+*   PostDetailsActivity shows details of post
+*
+ */
+
 import 'package:flutter/material.dart';
 import 'constants.dart';
 import 'feed_item.dart';
@@ -16,6 +22,7 @@ class _PostDetailsActivityState extends State<PostDetailsActivity>{
   String _pid;
   Future<FeedItem> _item;
 
+  // fetch post details and set in the `_item` variable
   Future<FeedItem> _fetchItem() async{
     final response = await http.post(Constants.url_fetchPost, body: {
       Constants.getCode("uPostId") : _pid,
@@ -80,6 +87,7 @@ class _PostDetailsActivityState extends State<PostDetailsActivity>{
                       return Text(Strings.str_noSuchPost);
                     }
 
+                    // display the details as a FeedWidget item
                     return ListView(
                       children: <Widget>[
                         FeedWidget(item: item)

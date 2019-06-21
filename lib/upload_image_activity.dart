@@ -1,3 +1,10 @@
+/*
+*
+*   UploadImageActivity show the selection page for camera or gallery
+*   the photo is later passed to FinalizePhotoActivity.
+*
+ */
+
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
@@ -16,7 +23,6 @@ class _UploadImageActivityState extends State<UploadImageActivity> {
   GlobalKey<ScaffoldState> scaffoldKey;
 
   Future getImage(source) async {
-
     var image = await ImagePicker.pickImage(source: source);
 
     setState(() {
@@ -24,6 +30,7 @@ class _UploadImageActivityState extends State<UploadImageActivity> {
     });
   }
 
+  // pass photo to FinalizePhotoActivity
   void finalizePhoto() async{
     PhotoArg arg = new PhotoArg(image: _image, scaffoldKey:  scaffoldKey);
     await Navigator.pushNamed(context, FinalizePhotoActivity.route, arguments: arg);
@@ -32,9 +39,8 @@ class _UploadImageActivityState extends State<UploadImageActivity> {
 
   @override
   Widget build(BuildContext context) {
+    // get scaffold key (to pass to FinalizePhotoActivity
     scaffoldKey = ModalRoute.of(context).settings.arguments;
-
-    print(Constants.getCode("uUsername"));
 
     return Scaffold(
       appBar: AppBar(
@@ -64,6 +70,8 @@ class _UploadImageActivityState extends State<UploadImageActivity> {
                     ? Image.asset(Constants.image_selectImage)
                     : Image.file(_image),
               ),
+
+              // if image is not null, show a send next arrow
               _image == null
                   ? Container(
                       width: 0,
@@ -76,6 +84,8 @@ class _UploadImageActivityState extends State<UploadImageActivity> {
                       })
             ],
           ),
+
+          // row of two buttons. One for camera, one for gallery
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -100,7 +110,8 @@ class _UploadImageActivityState extends State<UploadImageActivity> {
                     ),
                     onPressed: () {
                       getImage(ImageSource.gallery);
-                    }),
+                    }
+                ),
               ),
             ],
           )

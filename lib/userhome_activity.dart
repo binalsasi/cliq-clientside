@@ -1,3 +1,10 @@
+/*
+*
+*   UserHomeActivity show a grid of posts that the user
+*   has posted.
+*
+ */
+
 import 'package:flutter/material.dart';
 import 'main_activity.dart';
 import 'constants.dart';
@@ -14,12 +21,11 @@ class UserHomeActivity extends StatefulWidget {
 
 class _UserHomeActivityState extends State<UserHomeActivity> with AutomaticKeepAliveClientMixin{
   bool wantKeepAlive = true;
-  String _userHome;
-  bool _homeLoading = true;
   
   Future<http.Response> ss;
   List<FeedItem> feeds;
 
+  // fetch user posted and show it to as a grid
   Future<http.Response> fetchMyHome() async{
       return http.post(Constants.url_fetchHome, body: {
         Constants.getCode("uUsername") : MainActivity.myProfile.profileId,

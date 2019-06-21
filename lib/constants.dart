@@ -3,13 +3,15 @@
 
   - for central handling of keys
   - for internal functioning
+
 */
 class Constants{
   static final String spref_username = "usernamex1";
   static final String spref_key      = "key";
 
-  //static final String hostname = "https://zinc-advice-242819.appspot.com";
-  static final String hostname = "http://192.168.0.133:8000";
+  // alter the following two definitions for usage in local (change ip too)
+  static final String hostname = "https://zinc-advice-242819.appspot.com";
+  //static final String hostname = "http://192.168.0.133:8000";
 
   static final String url_fetchCodeBase       = hostname + "/cliq_backend/fetch_code_base";
   static final String url_registration        = hostname + "/cliq_backend/register";
@@ -31,7 +33,11 @@ class Constants{
   static final String url_getComments         = hostname + "/cliq_backend/get_comments";
   static final String url_addComment          = hostname + "/cliq_backend/add_comment";
 
+
   static dynamic codebase;
+
+
+  // defaultCodeBase is used until the code base is obtained.
   static dynamic defaultCodeBase = {
     "uUsername": "username",
     "uProfileId": "profileId",
@@ -57,6 +63,7 @@ class Constants{
     return codebase[type];
   }
 
+  // routes are flutter tags to identify pages.
   static final String route_MainActivity = "/";
   static final String route_RegistrationActivity = "/RegistrationActivity";
   static final String route_HomeActivity = "/HomeActivity";
@@ -75,6 +82,7 @@ class Constants{
   Strings class
 
   - for localization
+  TODO add all strings to the strings class
  */
 class Strings{
   static final String title_App = "Cliq";

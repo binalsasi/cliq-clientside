@@ -1,3 +1,10 @@
+/*
+  *
+  *   FeedWidget is a widget that displays the details of a feed.
+  *
+ */
+
+
 import 'package:flutter/material.dart';
 import 'profile_activity.dart';
 import 'feed_item.dart';
@@ -23,6 +30,7 @@ class _FeedWidgetState extends State<FeedWidget>{
   TextEditingController commentController = new TextEditingController();
   bool showComments = false;
 
+  // send like request to server (or unlike)
   void likePost(String id, bool value) async{
     String url;
     if(value)
@@ -45,6 +53,7 @@ class _FeedWidgetState extends State<FeedWidget>{
     });
   }
 
+  // fetch comments and update the widget.item.comments
   void fetchComments(String postId) async{
     http.post(Constants.url_getComments, body: {
       Constants.getCode("uUsername") : MainActivity.myProfile.profileId,
@@ -67,6 +76,7 @@ class _FeedWidgetState extends State<FeedWidget>{
 
   }
 
+  // send comment to the server, update the widget.item.comments
   void sendComment(String postId, String comment) async{
     http.post(Constants.url_addComment, body: {
       Constants.getCode("uUsername") : MainActivity.myProfile.profileId,
@@ -98,6 +108,9 @@ class _FeedWidgetState extends State<FeedWidget>{
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
+
+
+              // username section
               GestureDetector(
                 onTap: (){
                   Navigator.pushNamed(context, ProfileActivity.route,arguments: widget.item.username);
@@ -125,6 +138,8 @@ class _FeedWidgetState extends State<FeedWidget>{
                   ),
                 ),
               ),
+
+              // post image section
               GestureDetector(
                 onTap: (){
                   Navigator.pushNamed(context, PostDetailsActivity.route,arguments: widget.item.pid);
@@ -146,12 +161,17 @@ class _FeedWidgetState extends State<FeedWidget>{
                   ),
                 ),
               ),
+
+              // the like & comment button section
               Container(
                 color: Colors.white70,
                 padding: EdgeInsets.all(10.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
+
+
+                    // the like button
                     GestureDetector(
                       onTap: (){
                           likePost(widget.item.pid, !widget.item.isLiked());
@@ -177,6 +197,9 @@ class _FeedWidgetState extends State<FeedWidget>{
                         ),
                       ),
                     ),
+
+
+                    // the comments button
                     GestureDetector(
                       onTap: (){
                         if(showComments) {
@@ -209,6 +232,10 @@ class _FeedWidgetState extends State<FeedWidget>{
                   ],
                 ),
               ),
+
+
+
+              // the description section
               Container(
                   padding: EdgeInsets.all(15.0),
                   color: Colors.white,
@@ -239,6 +266,10 @@ class _FeedWidgetState extends State<FeedWidget>{
                     ],
                   )
               ),
+
+
+
+              // the comments section. shown only if comment button is pressed
               showComments ?
 
               widget.item.comments == null ?
@@ -274,12 +305,15 @@ class _FeedWidgetState extends State<FeedWidget>{
                   :
                   Container(height: 0, width: 0,),
 
+              // The comment input section
               Container(
                 color: Colors.white,
                 padding: EdgeInsets.all(10.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
+
+                    // comment input
                     Container(
                       child: SizedBox(
                         width: MediaQuery.of(context).size.width * 0.7,
@@ -288,6 +322,9 @@ class _FeedWidgetState extends State<FeedWidget>{
                         ),
                       ),
                     ),
+
+
+                    // send button
                     Container(
                       child: IconButton(
                           icon: Icon(Icons.send),
@@ -305,12 +342,18 @@ class _FeedWidgetState extends State<FeedWidget>{
     );
   }
 
+  // creates a comment section
   Widget createCommentColumn(){
     List<Widget> children = new List();
     widget.item.comments.forEach((comment){
-      children.add(Container(
-        padding: EdgeInsets.all(10.0),
-        child: CommentBox(comment: comment,),
+      children.add(GestureDetector(
+          onTap: (){
+            Navigator.pushNamed(context, ProfileActivity.route,arguments: widget.item.username);
+          },
+          child: Container(
+            padding: EdgeInsets.all(10.0),
+            child: CommentBox(comment: comment,),
+          )
       ));
     });
 
@@ -318,6 +361,8 @@ class _FeedWidgetState extends State<FeedWidget>{
   }
 }
 
+
+// comment widget. Displays the comment.
 class CommentBox extends StatelessWidget{
   CommentItem comment;
 
@@ -328,6 +373,9 @@ class CommentBox extends StatelessWidget{
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
+
+
+        // username of comment
         Container(
           width: MediaQuery.of(context).size.width * 0.8,
           margin: EdgeInsets.only(right: 20.0),
@@ -341,6 +389,8 @@ class CommentBox extends StatelessWidget{
           ),
         ),
 
+
+        // comment body
         Container(
           margin: EdgeInsets.only(top: 5.0, bottom: 10.0),
           child: Text(
@@ -354,6 +404,8 @@ class CommentBox extends StatelessWidget{
           ),
         ),
 
+
+        // timestamp
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: <Widget>[

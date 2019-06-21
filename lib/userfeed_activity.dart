@@ -1,3 +1,10 @@
+/*
+*
+*   UserFeedActivity shows a list of feeds
+*
+ */
+
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'feed_item.dart';
@@ -17,7 +24,8 @@ class _UserFeedActivityState extends State<UserFeedActivity> with AutomaticKeepA
   List<FeedItem> feeds;
   final GlobalKey<RefreshIndicatorState> feedRefreshKey = new GlobalKey<RefreshIndicatorState>();
 
-
+  // fetchMyFeeds fetches feeds from the server
+  // displays it as a list of FeedWidget s
   Future<List<FeedItem>> fetchMyFeeds(String timestamp) async {
     if(timestamp == null)
       timestamp = "null";
@@ -58,6 +66,7 @@ class _UserFeedActivityState extends State<UserFeedActivity> with AutomaticKeepA
     WidgetsBinding.instance.addPostFrameCallback((_) => feedRefreshKey.currentState.show());
   }
 
+
   Future<Null> _refresh(){
     return fetchMyFeeds(null).then((listOfItems){
       setState((){
@@ -69,6 +78,10 @@ class _UserFeedActivityState extends State<UserFeedActivity> with AutomaticKeepA
     });
   }
 
+
+  // fetch more feeds from the server
+  // adds to the current list of feeds
+  // and update
   void fetchMore(String timestamp){
     fetchMyFeeds(timestamp).then((listOfItems){
       setState((){
@@ -137,6 +150,8 @@ class _UserFeedActivityState extends State<UserFeedActivity> with AutomaticKeepA
   }
 }
 
+
+// the "Feed More" button
 class FetchMoreWidget extends StatelessWidget{
   FeedItem item;
   Function fetchMore;
@@ -152,10 +167,9 @@ class FetchMoreWidget extends StatelessWidget{
             onPressed: () {
               fetchMore(item.timestamp);
             }
-    ),
-    ),
+        ),
+      ),
     );
-    }
-
+  }
 }
 

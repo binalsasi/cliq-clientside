@@ -20,13 +20,17 @@ import 'userprofile.dart';
 class MainActivity extends StatefulWidget{
   static final String route = Constants.route_MainActivity;
 
+  // the user object
+  // it contains the details of the user
   static UserProfile myProfile = new UserProfile();
 
+  // get code base
   Future<http.Response> getCodes() async{
     return http.post(Constants.url_fetchCodeBase);
   }
 
 
+  // get list of followers and update user object
   static void getFollowers() async{
     http.post(Constants.url_getFollowers, body: {
       Constants.getCode("uUsername") : MainActivity.myProfile.profileId,
@@ -55,6 +59,7 @@ class MainActivity extends StatefulWidget{
     });
   }
 
+  // get list of followings and add to user object
   static void getFollowings() async{
     http.post(Constants.url_getFollowings, body: {
       Constants.getCode("uUsername") : MainActivity.myProfile.profileId,
@@ -89,6 +94,7 @@ class MainActivity extends StatefulWidget{
 
 class _MainActivityState extends State<MainActivity>{
 
+  // check if user is registered. if not goto RegistrationActivity
   Future<Null> checkUser() async{
     SharedPreferences.getInstance().then((pref){
       String username = pref.get(Constants.spref_username);

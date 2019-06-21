@@ -1,3 +1,9 @@
+/*
+*
+*   UserProfile class is a placeholder
+*   for user profile.
+*
+ */
 import 'feed_item.dart';
 import 'constants.dart';
 
@@ -16,7 +22,7 @@ class UserProfile{
   UserProfile.fromJson(Map<String, dynamic> json){
     profileId = json[Constants.getCode("dProfileId")];
     final imglist = json[Constants.getCode("dThumbs")];
-    if(imglist == "E:0x80003"){
+    if(imglist == Constants.getCode("ecode_noFeeds")){
       imageList = null;
       imageCount = 0;
     }

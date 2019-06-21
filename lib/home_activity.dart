@@ -1,3 +1,10 @@
+/*
+*
+*   The home page (after loading/registration)
+*   This page contains the two sliding tabs - feeds and user posts pages.
+*
+ */
+
 import 'package:flutter/material.dart';
 import 'upload_image_activity.dart';
 import 'userhome_activity.dart';
@@ -21,6 +28,7 @@ class _HomeActivityState extends State<HomeActivity> with AutomaticKeepAliveClie
 
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
 
+  // goto the UploadImageActivity
   void uploadPhoto() async {
     Navigator.pushNamed(context, UploadImageActivity.route, arguments: scaffoldKey);
   }
@@ -44,12 +52,6 @@ class _HomeActivityState extends State<HomeActivity> with AutomaticKeepAliveClie
                 uploadPhoto();
               }),
           appBar: AppBar(
-            /*
-              bottom: TabBar(tabs: [
-              Tab(icon: Icon(Icons.account_box),),
-              Tab(icon: Icon(Icons.add_a_photo),),
-            ]),
-            */
             actions: <Widget>[
               IconButton(
                 icon: Icon(Icons.person_add),
@@ -74,14 +76,9 @@ class _HomeActivityState extends State<HomeActivity> with AutomaticKeepAliveClie
           ),
           body: TabBarView(children: [
             Container(
-              //color: Colors.red,
               child: UserFeedActivity(),
             ),
             Container(
-              //color: Colors.blue,
-              /*
-              child: Icon(Icons.add_a_photo),
-              */
               child: UserHomeActivity(),
             ),
           ]),

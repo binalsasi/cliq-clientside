@@ -53,8 +53,6 @@ class MyApp extends StatelessWidget {
   void getCodes(){
     http.post(Constants.url_fetchCodeBase).then((response){
       // handle basic error codes
-      print("SADDD");
-      print(response.body);
 
       final body = response.body;
       final codeJson = jsonDecode(body);

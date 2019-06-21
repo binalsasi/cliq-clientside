@@ -1,3 +1,9 @@
+/*
+*
+*   ProfileActivity shows a user profile.
+*   The users posts and the follow button.
+*
+ */
 import 'package:flutter/material.dart';
 import 'main_activity.dart';
 import 'constants.dart';
@@ -15,6 +21,7 @@ class ProfileActivity extends StatefulWidget {
 
 class _ProfileActivityState extends State<ProfileActivity> with AutomaticKeepAliveClientMixin{
   bool wantKeepAlive = true;
+  bool privateUser = true;
 
   Future<http.Response> ss;
   UserProfile profile;
@@ -74,15 +81,20 @@ class _ProfileActivityState extends State<ProfileActivity> with AutomaticKeepAli
                     http.Response result = snapshot.data;
 
                     print(result.body);
-                    if(result.body == "E:0x80004")
-                      return Center(
-                        child: Text("404x Profile Not Found"),
-                      );
+                    print(Constants.getCode("ecode_notFollowing"));
+                    if(result.body == Constants.getCode("ecode_notFollowing")) {
+                      privateUser = true;
+                      profile = new UserProfile();
+                      profile.profileId = profileId;
+                    }
+                    else {
+                      privateUser = false;
 
-                    final user = jsonDecode(result.body);
-                    print(user);
+                      final user = jsonDecode(result.body);
+                      print(user);
 
-                    profile = UserProfile.fromJson(user);
+                      profile = UserProfile.fromJson(user);
+                    }
 
                     return Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -91,12 +103,17 @@ class _ProfileActivityState extends State<ProfileActivity> with AutomaticKeepAli
                           padding: EdgeInsets.all(20.0),
                           child:makeFollowButton(),
                         ),
+
+                        privateUser ?
+                            Center(
+                              child: Text("This user is private. Send a follow request to see their posts"),
+                            ) :
                         SizedBox(
                           height: MediaQuery.of(context).size.height*0.7,
                           child: GridView.count(
                             crossAxisCount: 3,
                             children: List.generate(
-                                profile.imageList.length,
+                                profile.imageList == null ? 0 : profile.imageList.length,
                                     (index){
                                   return GestureDetector(
                                     onTap: (){
@@ -123,6 +140,7 @@ class _ProfileActivityState extends State<ProfileActivity> with AutomaticKeepAli
 
   String buttonState = "none";
 
+  // make correct button based on state
   Widget makeFollowButton(){
     print("makefollow button state " + buttonState);
     // TODO use enum
@@ -157,6 +175,7 @@ class _ProfileActivityState extends State<ProfileActivity> with AutomaticKeepAli
     }
   }
 
+  // send follow request to server (or unfollow)
   void follow(bool follow) async{
     setState(() {
       buttonState = "sending";

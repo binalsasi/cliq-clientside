@@ -1,3 +1,10 @@
+/*
+*
+*   DiscoverPeopleActivity shows a list of usernames for user to follow
+*
+ */
+
+
 import 'package:flutter/material.dart';
 import 'constants.dart';
 import 'package:http/http.dart' as http;

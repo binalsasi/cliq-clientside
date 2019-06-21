@@ -1,3 +1,13 @@
+/*
+*
+*   RegistrationActivity is the registration page
+*   TODO add google sign in authentication
+*   TODO fix the google_sign_in , image_picker dependency conflict
+*   this conflict is the reason I couldn't integrate google_sign_in.
+*   This caused, dex archive merge error.
+*
+ */
+
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
@@ -18,6 +28,8 @@ class _RegistrationActivity extends State<RegistrationActivity> {
   void signup() async{
     String username = usernameController.text;
 
+    // send username to server,
+    // on success save username, and the key to shared preferences.
     http.post(Constants.url_registration, body: {
       Constants.getCode("uUsername")  : username,
     }).then((res) async{
@@ -65,6 +77,7 @@ class _RegistrationActivity extends State<RegistrationActivity> {
                 ),
                 TextFormField(
                   controller: usernameController,
+                  //TODO check for invalid characters
                 ),
                 RaisedButton(
                   child: Text(Strings.str_signup),

@@ -1,3 +1,12 @@
+/*
+*
+*   FinalizePhotoActivity is where photo is finalized and sent to server
+*   TODO make the upload function static, or move it to some static class
+*   TODO as at the moment, the app hangs for a few moments until it is  uploaded
+*
+ */
+
+
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'dart:io';
@@ -14,6 +23,8 @@ class FinalizePhotoActivity extends StatefulWidget {
   _FinalizePhotoActivityState createState() => _FinalizePhotoActivityState();
 }
 
+
+// PhotoArg class is used as a placeholder for passing data from the UploadImageActivity
 class PhotoArg{
   File image;
   GlobalKey<ScaffoldState> scaffoldKey;
@@ -44,6 +55,7 @@ class _FinalizePhotoActivityState extends State<FinalizePhotoActivity> {
   }
 }
 
+// The upload form
 class FinalizePhotoForm extends StatefulWidget {
   PhotoArg arg;
 
@@ -58,6 +70,8 @@ class _FinalizePhotoFormState extends State<FinalizePhotoForm> {
 
   final descController = TextEditingController();
 
+
+  // send image, description to the server to finalize the post
   Future _sendImage() async{
     if(widget.arg.image == null) return false;
 
@@ -124,6 +138,7 @@ class _FinalizePhotoFormState extends State<FinalizePhotoForm> {
                       child: TextFormField(
                         autofocus: true,
                         controller: descController,
+                        // TODO handle validation
                         validator: (value) {
                           return Constants.getCode("OK");
                         },
@@ -137,6 +152,21 @@ class _FinalizePhotoFormState extends State<FinalizePhotoForm> {
                   Expanded(
                       child:RaisedButton(
                         child: Text(Strings.str_post),
+                        /*
+                          When post button is presed,
+                          navigate back to the home page,
+                          while uploading in the background.
+                          Finally show a snack bar containing the result
+                          message.
+
+                          At the moment this isn't working as expected.
+                          The post button hangs until the photo is uploaded.
+                          It could be because the _sendImage() is not static.
+                          And thus needs an object of this class to remain
+                          in memory for it to work. Which could explain why
+                          the screen is not navigated back to the home page.
+
+                         */
                         onPressed: (){
                           Navigator.pop(context);
                           _sendImage();

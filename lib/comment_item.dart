@@ -1,3 +1,9 @@
+/*
+*
+* CommentItem class is placeholder for a comment
+*
+ */
+
 import 'package:flutter/material.dart';
 import 'constants.dart';
 
